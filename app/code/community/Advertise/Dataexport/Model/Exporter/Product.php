@@ -15,6 +15,7 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
     {
         $collection = Mage::getModel('catalog/product')
             ->getCollection()
+            ->addFieldToFilter('status',Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->addAttributeToSelect('*')
         ;
         return $collection;
@@ -93,10 +94,15 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
                     break;
             }
             $prodtype = $product->getTypeID();
-            $prodcolor = $product->getResource()->getAttribute('color')->getFrontend()->getValue($product);
-            if ($prodcolor == "No") {
+            if ($product->getResource()->getAttribute('color')) {
+                $prodcolor = $product->getResource()->getAttribute('color')->getFrontend()->getValue($product);
+                if ($prodcolor == "No") {
+                    $prodcolor == "";
+                }
+            } else {
                 $prodcolor == "";
             }
+            
             if ($advColorsInstalled) {
                 $prodadvswatchcolor = $product->getResource()->getAttribute('advertise_swatch_colors')->getFrontend()->getValue($product);
                 if ($prodadvswatchcolor == "No") {
@@ -114,14 +120,30 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
             $stocklevel = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($product)->getQty();
             $specialprice = $product->getSpecialPrice();
             $prodweight = $product->getWeight();
-            $prodman = $product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($product);
-            $prodgender = $product->getResource()->getAttribute('gender')->getFrontend()->getValue($product);
+            if ($product->getResource()->getAttribute('manufacturer')) {
+                $prodman = $product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($product);
+            } else {
+                $prodman = "";
+            }
+            if ($product->getResource()->getAttribute('gender')) {
+                $prodgender = $product->getResource()->getAttribute('gender')->getFrontend()->getValue($product);
+            } else {
+                $prodgender = "";
+            }
             $metatitle = $product->getMetaTitle();
             $metadesc = $product->getMetaDescription();
             $metakw = $product->getMetaKeyword();
             
-            $size1 = $product->getResource()->getAttribute('shoe_size')->getFrontend()->getValue($product);
-            $size2 = $product->getResource()->getAttribute('shirt_size')->getFrontend()->getValue($product);
+            if ($product->getResource()->getAttribute('shoe_size')) {
+                $size1 = $product->getResource()->getAttribute('shoe_size')->getFrontend()->getValue($product);
+            } else {
+                $size1 = "";
+            }
+            if ($product->getResource()->getAttribute('shirt_size')) {
+                $size2 = $product->getResource()->getAttribute('shirt_size')->getFrontend()->getValue($product);
+            } else {
+                $size2 = "";
+            }
             
             // Set the data to be written
             $data['prodname'] = $prodName;
