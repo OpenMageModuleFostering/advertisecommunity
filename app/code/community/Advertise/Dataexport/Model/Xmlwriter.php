@@ -151,7 +151,8 @@ class Advertise_Dataexport_Model_Xmlwriter extends XMLWriter
         }
         /** node **/
         else {
-            $this->text((string) $item);
+            //$this->text((string) $item);
+            $this->writeCData((string) $item);
         }
         
         if(isset($nodeName)) {

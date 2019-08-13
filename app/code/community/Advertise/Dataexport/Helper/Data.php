@@ -36,11 +36,26 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             //Mage::log("No customer ID.");
             $customerId = '';
         }
+        $relcount   = Mage::getStoreConfig('advertise_suggestedproducts_options/advertise_suggested_products/advertise_related_prod_count');
+        $upcount    = Mage::getStoreConfig('advertise_suggestedproducts_options/advertise_suggested_products/advertise_upsell_prod_count');
+        $crosscount = Mage::getStoreConfig('advertise_suggestedproducts_options/advertise_suggested_products/advertise_crosssell_prod_count');
+        if($relcount == null) {
+            $relcount = 0;
+        }
+        if($upcount == null) {
+            $upcount = 0;
+        }
+        if($crosscount == null) {
+            $crosscount = 0;
+        }
         $jsoutput = "
             var adv_store_base_url = '".Mage::getBaseUrl()."';
             var adv_reload = true;
             adv_upsell_reload = true;
             adv_crosssell_reload = true;
+            var adv_rel_count = '".$relcount."';
+            adv_upsell_count = '".$upcount."';
+            adv_crosssell_count = '".$crosscount."';
             var adv_productid = '".$prodid."';
             var adv_bsk = '".$basket."';
             var adv_oid = '".$orderId."';

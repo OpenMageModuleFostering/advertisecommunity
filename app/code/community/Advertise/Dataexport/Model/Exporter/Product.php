@@ -28,6 +28,16 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
      */
      public function write(XMLWriter $writer)
      {
+        // First, check whether or not Colors module is installed
+        $advColorsInstalled = false;
+        $modules = Mage::getConfig()->getNode('modules')->children();
+        foreach ($modules as $mod) {
+            if (stripos($mod->getName(), "Advertise_Importer", 0) === 0) {
+                $advColorsInstalled = true;
+            }
+        }
+                
+        // Export product data
         $writer->startElement('feedItems');
         $ourversion = Mage::getConfig()->getModuleConfig("Advertise_Dataexport")->version;
         $date = date('Y-m-d');
@@ -87,9 +97,19 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
             if ($prodcolor == "No") {
                 $prodcolor == "";
             }
-            $prodadvcolor = $product->getResource()->getAttribute('advertise_colors')->getFrontend()->getValue($product);
-            if ($prodadvcolor == "No") {
-                $prodadvcolor == "";
+            if ($advColorsInstalled) {
+                $prodadvswatchcolor = $product->getResource()->getAttribute('advertise_swatch_colors')->getFrontend()->getValue($product);
+                if ($prodadvswatchcolor == "No") {
+                    $prodadvswatchcolor == "";
+                }
+                $prodadvautocolor = $product->getResource()->getAttribute('advertise_auto_colors')->getFrontend()->getValue($product);
+                if ($prodadvautocolor == "No") {
+                    $prodadvautocolor == "";
+                }
+            } else {
+                // Advertise_Colors not installed so these attributes do not exist in database
+                $prodadvswatchcolor = "";
+                $prodadvautocolor = "";
             }
             $stocklevel = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($product)->getQty();
             $specialprice = $product->getSpecialPrice();
@@ -112,8 +132,11 @@ class Advertise_Dataexport_Model_Exporter_Product extends Varien_Object implemen
             if ($prodcolor != "No") {
                 $data['color'] = $prodcolor;
             }
-            if ($prodadvcolor != "No") {
-                $data['advertisecolor'] = $prodadvcolor;
+            if ($prodadvswatchcolor != "No") {
+                $data['advertiseSwatchColor'] = $prodadvswatchcolor;
+            }
+            if ($prodadvautocolor != "No") {
+                $data['advertiseAutoColor'] = $prodadvautocolor;
             }
             $data['price'] = $baseprice;
             if($specialprice){

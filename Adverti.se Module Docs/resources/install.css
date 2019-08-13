@@ -23,7 +23,14 @@ p {
     clear: left;
     margin-bottom: 1em;
 }
-
+p.note {
+    font-size: 80%;
+}
+p.footer {
+    text-align: center;
+    font-size: 75%;
+    color: #800000;
+}
 code, .filename, .filepath, .code {
     font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
 }
@@ -67,8 +74,3 @@ table.swatch {
     margin-right: auto;
 }
 
-p.footer {
-    text-align: center;
-    font-size: 75%;
-    color: #800000;
-}
