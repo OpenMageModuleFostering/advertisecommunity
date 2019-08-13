@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<config>
+    <tabs>
+        <Advertise translate="label">
+            <label>Advertise</label>
+            <sort_order>405</sort_order>
+        </Advertise>
+    </tabs>
+
+    <sections>
+        <advertise translate="label">
+            <label>License</label>
+            <tab>Advertise</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <advertise translate="label">
+                    <label>Adverti.se License</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <version translate="label comment">
+                            <label>Extension version</label>
+                            <frontend_type>Link</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </version>
+                        
+                        <get_online_license translate="label comment">
+                            <label>Get online license :</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </get_online_license>
+
+                        <license translate="label comment">
+                            <label>License</label>
+                            <frontend_type>Advertiselicense</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </license>
+                        
+                        <activated translate="label comment">
+                            <label>Activate this store :</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </activated>
+                      
+                        <template translate="label comment">
+                            <label>Template (will be hidden)</label>
+                            <frontend_type>advertisetemplate</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template>
+                    </fields>
+                </advertise>
+            </groups>
+        </advertise>
+        <advertise_settings translate="label" module="product">
+            <class>separator-top</class>
+            <label>Settings</label>
+            <tab>Advertise</tab>
+            <sort_order>130</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <!-- REMOVE ADMIN BAR
+                <admin_bar translate="label">
+                    <label>Admin Bar Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <turn_off translate="label">
+                            <label>Enable Adverti.se Admin Bar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>account/config_source_onoff</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </turn_off>
+                    </fields>
+                </admin_bar> -->
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <settings_email translate="label">
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>account/config</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </settings_email>
+                    </fields>
+                </settings>
+            </groups>
+        </advertise_settings>
+    </sections>
+</config>

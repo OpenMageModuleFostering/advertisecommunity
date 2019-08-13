@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Advertise
+ * @package    Advertise_Account
+ */
+ --> 
+<config>
+    <modules>
+        <Advertise_Account>
+            <version>1.0.2</version>
+        </Advertise_Account>
+    </modules>
+    
+    <!-- Default values for settings: nest nodes as configuration setting path, e.g. advertise/account/version -->
+    <default>
+        <!-- Should change to "account" as bottom one, need to update system.xml section and other names... -->
+        <advertise>
+            <advertise>
+                <version>1.0.2</version>
+                <template>3c666565646974656d3e0d0a202020203c70726f6475637469643e7b69647d3c2f70726f6475637469643e0d0a202020203c736b753e7b736b757d3c2f736b753e0d0a202020203c70726f646e616d653e7b6e616d657d3c2f70726f646e616d653e0d0a202020203c75726c3e7b75726c7d3c2f75726c3e0d0a202020203c70726963653e7b70726963657d3c2f70726963653e0d0a202020203c707269636553616c653e7b7370656369616c5f70726963657d3c2f707269636553616c653e0d0a202020203c6465736372697074696f6e3e7b6465736372697074696f6e7d3c2f6465736372697074696f6e3e0d0a202020203c636f6e646974696f6e3e7b636f6e646974696f6e7d3c2f636f6e646974696f6e3e0d0a202020203c6d6167656e746f5669736962696c6974793e7b7669736962696c6974797d3c2f6d6167656e746f5669736962696c6974793e0d0a202020203c747970653e7b70726f647563745f747970657d3c2f747970653e0d0a202020203c63617465676f72793e7b63617465676f726965737d3c2f63617465676f72793e0d0a202020203c70726f64696d6167653e7b696d6167652c5b305d7d3c2f70726f64696d6167653e0d0a202020203c70726f64696d616765416c743e7b696d6167652c5b315d7d3c2f70726f64696d616765416c743e0d0a202020203c617661696c6162696c6974793e7b617661696c6162696c6974797d3c2f617661696c6162696c6974793e0d0a202020203c7175616e746974793e7b7174797d3c2f7175616e746974793e0d0a202020203c636f6c6f723e7b636f6c6f722c5b696d706c6f64655d2c5b2c5d7d3c2f636f6c6f723e0d0a202020203c7368697070696e675765696768743e7b7765696768747d3c2f7368697070696e675765696768743e0d0a202020203c6d616e7566616374757265723e7b6d616e7566616374757265727d3c2f6d616e7566616374757265723e0d0a202020203c6272616e643e7b6272616e647d3c2f6272616e643e0d0a202020203c6d706e3e7b6d706e7d3c2f6d706e3e0d0a202020203c6774696e3e7b6774696e7d3c2f6774696e3e0d0a202020203c73697a653e7b73697a652c5b696d706c6f64655d2c5b2c5d7d3c2f73697a653e0d0a202020203c67656e6465723e7b67656e6465727d3c2f67656e6465723e0d0a202020203c6d6574615469746c653e7b6d6574615f7469746c657d3c2f6d6574615469746c653e0d0a202020203c6d6574614465736372697074696f6e3e7b6d6574615f6465736372697074696f6e7d3c2f6d6574614465736372697074696f6e3e0d0a202020203c6d6574614b6579776f7264733e7b6d6574615f6465736372697074696f6e7d3c2f6d6574614b6579776f7264733e0d0a202020203c6164766572746973652e7365617263683e7b6164766572746973655f7365617263687d3c2f6164766572746973652e7365617263683e0d0a202020203c6164766572746973652e646973706c61793e7b6164766572746973655f7365617263687d3c2f6164766572746973652e646973706c61793e0d0a202020203c6164766572746973652e66623e7b6164766572746973655f66627d3c2f6164766572746973652e66623e0d0a202020203c6164766572746973652e6370633e7b6164766572746973655f6370637d3c2f6164766572746973652e6370633e0d0a202020203c6174747269627574655f7365745f6e616d653e7b6174747269627574655f7365745f6e616d657d3c2f6174747269627574655f7365745f6e616d653e0d0a3c2f666565646974656d3e</template>
+            </advertise>
+        </advertise>
+        <advertise>
+            <account>
+                <version>1.0.2</version>
+                <template>3c666565646974656d3e0d0a202020203c70726f6475637469643e7b69647d3c2f70726f6475637469643e0d0a202020203c736b753e7b736b757d3c2f736b753e0d0a202020203c70726f646e616d653e7b6e616d657d3c2f70726f646e616d653e0d0a202020203c75726c3e7b75726c7d3c2f75726c3e0d0a202020203c70726963653e7b70726963657d3c2f70726963653e0d0a202020203c707269636553616c653e7b7370656369616c5f70726963657d3c2f707269636553616c653e0d0a202020203c6465736372697074696f6e3e7b6465736372697074696f6e7d3c2f6465736372697074696f6e3e0d0a202020203c636f6e646974696f6e3e7b636f6e646974696f6e7d3c2f636f6e646974696f6e3e0d0a202020203c6d6167656e746f5669736962696c6974793e7b7669736962696c6974797d3c2f6d6167656e746f5669736962696c6974793e0d0a202020203c747970653e7b70726f647563745f747970657d3c2f747970653e0d0a202020203c63617465676f72793e7b63617465676f726965737d3c2f63617465676f72793e0d0a202020203c70726f64696d6167653e7b696d6167652c5b305d7d3c2f70726f64696d6167653e0d0a202020203c70726f64696d616765416c743e7b696d6167652c5b315d7d3c2f70726f64696d616765416c743e0d0a202020203c617661696c6162696c6974793e7b617661696c6162696c6974797d3c2f617661696c6162696c6974793e0d0a202020203c7175616e746974793e7b7174797d3c2f7175616e746974793e0d0a202020203c636f6c6f723e7b636f6c6f722c5b696d706c6f64655d2c5b2c5d7d3c2f636f6c6f723e0d0a202020203c7368697070696e675765696768743e7b7765696768747d3c2f7368697070696e675765696768743e0d0a202020203c6d616e7566616374757265723e7b6d616e7566616374757265727d3c2f6d616e7566616374757265723e0d0a202020203c6272616e643e7b6272616e647d3c2f6272616e643e0d0a202020203c6d706e3e7b6d706e7d3c2f6d706e3e0d0a202020203c6774696e3e7b6774696e7d3c2f6774696e3e0d0a202020203c73697a653e7b73697a652c5b696d706c6f64655d2c5b2c5d7d3c2f73697a653e0d0a202020203c67656e6465723e7b67656e6465727d3c2f67656e6465723e0d0a202020203c6d6574615469746c653e7b6d6574615f7469746c657d3c2f6d6574615469746c653e0d0a202020203c6d6574614465736372697074696f6e3e7b6d6574615f6465736372697074696f6e7d3c2f6d6574614465736372697074696f6e3e0d0a202020203c6d6574614b6579776f7264733e7b6d6574615f6465736372697074696f6e7d3c2f6d6574614b6579776f7264733e0d0a202020203c6164766572746973652e7365617263683e7b6164766572746973655f7365617263687d3c2f6164766572746973652e7365617263683e0d0a202020203c6164766572746973652e646973706c61793e7b6164766572746973655f7365617263687d3c2f6164766572746973652e646973706c61793e0d0a202020203c6164766572746973652e66623e7b6164766572746973655f66627d3c2f6164766572746973652e66623e0d0a202020203c6164766572746973652e6370633e7b6164766572746973655f6370637d3c2f6164766572746973652e6370633e0d0a202020203c6174747269627574655f7365745f6e616d653e7b6174747269627574655f7365745f6e616d657d3c2f6174747269627574655f7365745f6e616d653e0d0a3c2f666565646974656d3e</template>
+            </account>
+        </advertise>
+    </default>
+    
+    <!-- Setup resources -->
+    <!-- ??? Mysql4_Setup class does not exist anywhere ??? -->
+    <resources>
+        <account_setup>
+            <setup>
+                <module>Advertise_Account</module>
+                <class>Advertise_Account_Resource_Mysql4_Setup</class>
+            </setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </account_setup>
+    </resources>
+	
+    <frontend>
+        <routers>
+            <account>
+                <use>standard</use>
+                <args>
+                    <module>Advertise_Account</module>
+                    <frontName>account</frontName>
+                </args>
+            </account>
+            
+            <!-- Not sure what this /product frontName is used for? -->
+            <product>
+                <use>standard</use>
+                <args>
+                    <module>Advertise_Account</module>
+                    <frontName>product</frontName>
+                </args>
+            </product>
+            
+        </routers>
+        
+        <!-- Not sure what this layout element does - product.xml doesn't exist anywhere? -->
+        <layout>
+            <updates>
+                <Advertise>
+                    <file>product.xml</file>
+                </Advertise>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <admin>
+        <routers>
+            <account>
+                <use>admin</use>
+                <args>
+                    <module>Advertise_Account</module>
+                    <frontName>account</frontName>
+                </args>
+            </account>
+        </routers>
+    </admin>
+
+    <global>
+        <resources>
+            <advertise_setup>
+                <setup>
+                    <module>Advertise_Account</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </advertise_setup>
+            <advertise_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </advertise_write>
+            <advertise_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </advertise_read>
+        </resources>
+        
+        <blocks>
+            <advertise>
+                <class>Advertise_Account_Block</class>
+            </advertise>
+        </blocks>
+
+        <helpers>
+            <advertise>
+                <class>Advertise_Account_Helper</class>
+            </advertise>
+            <product>
+                <class>Advertise_Account_Helper</class>
+            </product>
+        </helpers>
+
+        <models>
+            <account>
+                <class>Advertise_Account_Model</class>
+            </account>
+        </models>
+    </global>
+    
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <advertise_settings translate="title" module="product">
+                                            <title>Advertise Section</title>
+                                            <sort_order>1</sort_order>
+                                        </advertise_settings>
+                                        <advertise translate="title">
+                                            <title>Advertise</title>
+                                            <sort_order>2</sort_order>
+                                        </advertise>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+		
+        <layout>
+            <updates>
+                <Advertise>
+                    <file>settings.xml</file>
+                </Advertise>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <!-- Do we still need this cron stuff? -->
+    <crontab>
+        <jobs>
+            <advertise_generate>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>advertise/observer::scheduledGenerateCatalogs</model>
+                </run>
+            </advertise_generate>
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @package    Advertise_Account
+ */
+ -->
+
+<config>
+    <!-- Declare Advertise_Account Module -->
+    <modules>
+        <Advertise_Account>
+            <active>true</active>
+            <codePool>community</codePool>
+            <class>Advertise_Account_Model_MyAccountModel</class>
+            <version>1.0.2</version>
+        </Advertise_Account>
+    </modules>
+</config>
