@@ -21,6 +21,8 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             $basket = '';
         }
 
+        $referrerId = $this->getReferrerPageProductID();
+
         $jsoutput = "
             var adv_store_base_url = '".Mage::getBaseUrl()."';
             var adv_reload = true;
@@ -28,6 +30,7 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             adv_crosssell_reload = true;
             var adv_productid = '".$prodid."';
             var adv_bsk = '".$basket."';
+            var adv_refid = '".$referrerId."';
             ";
             // var cartcount = '".Mage::helper('checkout/cart')->getCart()->getItemsCount()."';
 
@@ -120,5 +123,28 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
                     MCRYPT_MODE_CFB,
                     $initialVector
         );
+    }
+
+    function getReferrerPageProductID() {
+        $referrerPath = $_SERVER ['HTTP_REFERER'];
+        if (!strncmp($referrerPath, Mage::getBaseUrl(), strlen(Mage::getBaseUrl()))) {
+            // If REFERRER starts with store base URL
+            $referrerPath = substr($referrerPath, strlen(Mage::getBaseUrl()));
+        } else {
+            // Referrer not from this site so stop
+            return;
+        }
+        try {
+            $oRewrite = Mage::getModel('core/url_rewrite')
+                            ->setStoreId(Mage::app()->getStore()->getId())
+                            ->loadByRequestPath($referrerPath);
+            $iProductId = $oRewrite->getProductId();
+        } catch (Exception $e) {
+            // No product ID - referrer not product page
+            return;
+        }
+        // Gets product model object itself
+        //$oProduct = Mage::getModel('catalog/product')->load($iProductId);
+        return $iProductId;
     }
 }
