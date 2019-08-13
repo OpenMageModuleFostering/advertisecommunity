@@ -141,15 +141,19 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
         
     protected function _exportProducts()
     {
+        $_EXPORT_TYPE = "prodfeed";
         $config = Mage::getModel('dataexport/config');
         
         if( ! $config->getIsEnabled()) {
-            Mage::throwException($this->__('Module Disabled!'));
+            Mage::throwException($this->__('Data Export Module Disabled!'));
         }
         try {
             $exporter = Mage::getModel('dataexport/exporter');
             /* @var $exporter Advertise_Dataexport_Model_Exporter */
 
+            // Set export type for uploaded filename
+            $exporter->setExportType($_EXPORT_TYPE);
+            
             /**
              * Add Products Export
              */
@@ -160,6 +164,8 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
              * Do it!
              */
             $totalItems = $exporter->export();
+            
+            // TODO: Add success message to page when config is saved
             Mage::log("{$totalItems} products successfully exported when profile was saved.");
         } 
         catch (Exception $e) {
