@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-<!-- This Adverti.se tab is used by all Adverti.se extensions for config menu!
-         So if you change it then need to change in ALL extensions! -->
+<!-- This top-level Adverti.se tab is used by *all* Adverti.se extensions for config menu! -->
 
 <!-- Top Level Tab -->
     <tabs>
         <Advertise translate="label">
-            <label>Advertise</label>
+            <label>Adverti.se</label>
             <sort_order>405</sort_order>
         </Advertise>
     </tabs>
 
 <!-- Sections under Adverti.se tab -->
     <sections>
+        
+        <!-- No longer using this Licence code for authentication 
         <advertise translate="label">
             <label>License</label>
             <tab>Advertise</tab>
@@ -80,11 +81,12 @@
                 </advertise>
             </groups>
         </advertise>
-
-        <!-- This 'advertise_settings' node is for the general Adverti.se settings (e.g. email) and should be the same in all extensions -->
+        -->
+        
+        <!-- This 'advertise_settings' node is for the general Adverti.se account settings (e.g. email) -->
         <advertise_settings translate="label">
             <class>separator-top</class>
-            <label>Settings</label>
+            <label>Account Settings</label>
             <tab>Advertise</tab>
             <sort_order>130</sort_order>
             <show_in_default>1</show_in_default>
@@ -112,7 +114,7 @@
                     </fields>
                 </admin_bar> -->
                 <settings translate="label">
-                    <label>Settings</label>
+                    <label>Adverti.se Account Settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>5</sort_order>
                     <show_in_default>1</show_in_default>
@@ -209,7 +211,17 @@
                             <show_in_store>1</show_in_store>
                         </twitter_account>
                     -->
-
+                    
+                        <dataexport_message translate="label">
+                            <label>PLEASE NOTE:</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>advertise/config_dataexportmessage</frontend_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dataexport_message>
+                        
                     </fields>
                 </settings>
             </groups>

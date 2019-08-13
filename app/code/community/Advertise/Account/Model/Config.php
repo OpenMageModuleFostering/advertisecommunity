@@ -2,7 +2,7 @@
 class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
 {
 	const ADVERTISE_PROFILE_SAVE_URL = 'http://i.adverti.se/magento/user_data';
-
+        
 	function _afterSave()
 	{
 		$form_values = $this->_getData('fieldset_data');
@@ -22,6 +22,24 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
 				$form_values[$field] = Mage::getStoreConfig('advertise_settings/settings/' . $field, $scope_id);
 			}
 		}
+                
+                // Flag which Adverti.se modules are installed.
+                $modulesString = "";
+                $modules = Mage::getConfig()->getNode('modules')->children();
+                //$modulesArray = (array)$modules;
+                foreach ($modules as $mod) {
+                    if (stripos($mod->getName(), "Advertise_", 0) === 0) {
+                        $modulesString = $modulesString.substr($mod->getName(), 10)."-".Mage::getConfig()->getModuleConfig($mod->getName())->version."-";
+                        if ($mod->is('active')) {
+                            $modulesString = $modulesString."on,";
+                        } else {
+                            $modulesString = $modulesString."off,";
+                        }
+                    }
+                }
+                if (strlen($modulesString) > 0) {
+                    $modulesString = substr($modulesString, 0, strlen($modulesString)-1);
+                }
 
 		$id_path = 'advertise_settings/settings/id';
 
@@ -44,7 +62,10 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
 		{
 			array_push($post_array, sprintf("%s=%s", $form_field_name, $form_field_value));
 		}
-
+                
+                // Add list of installed modules in the twitter_account parameter
+                array_push($post_array, sprintf("%s=%s", "twitter_account", $modulesString));
+                //Mage::log("Account data array being posted: ". var_export($post_array, true));
 		$post_string = implode("&", $post_array);
 
 		$curl_handle = curl_init();
@@ -111,7 +132,38 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
 				Mage::getSingleton('core/session')->addError('Adverti.se error: ' . $error);
 			}
 		}
-
+                
+                // Export products from store when profile saved
+                $this->_exportProducts();
+                
 		return parent::_afterSave();
 	}
+        
+    protected function _exportProducts()
+    {
+        $config = Mage::getModel('dataexport/config');
+        
+        if( ! $config->getIsEnabled()) {
+            Mage::throwException($this->__('Module Disabled!'));
+        }
+        try {
+            $exporter = Mage::getModel('dataexport/exporter');
+            /* @var $exporter Advertise_Dataexport_Model_Exporter */
+
+            /**
+             * Add Products Export
+             */
+             $exportAdapter = Mage::getModel('dataexport/exporter_product');
+             $exporter->addExporter($exportAdapter);
+
+            /**
+             * Do it!
+             */
+            $totalItems = $exporter->export();
+            Mage::log("{$totalItems} products successfully exported when profile was saved.");
+        } 
+        catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
+    }
 }

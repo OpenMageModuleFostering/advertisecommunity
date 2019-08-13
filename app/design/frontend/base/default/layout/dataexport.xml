@@ -9,4 +9,18 @@
             <block type="dataexport/index" name="dataexport_index" template="dataexport/index.phtml"/>   
         </reference>   
     </dataexport_index_index>   
+    
+    <catalog_product_view>
+        <reference name="head">
+            <!-- Insert jQuery from Google into product pages;
+                 Not required for dataexport but include in Community
+                 as required by Colors and all Suggested Products extensions -->
+            <block type="core/text" name="google.cdn.jquery">
+                <action method="setText">
+                    <text><![CDATA[<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script><script type="text/javascript">jQuery.noConflict();</script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
 </layout>

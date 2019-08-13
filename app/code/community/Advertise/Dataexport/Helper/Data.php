@@ -28,7 +28,14 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             //Mage::log("No order ID.");
             $orderId = '';
         }
-        
+        $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+        if($customerId) {
+            //Mage::log("Got customer ID: ".$orderId);
+        }
+        else {
+            //Mage::log("No customer ID.");
+            $customerId = '';
+        }
         $jsoutput = "
             var adv_store_base_url = '".Mage::getBaseUrl()."';
             var adv_reload = true;
@@ -37,6 +44,7 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             var adv_productid = '".$prodid."';
             var adv_bsk = '".$basket."';
             var adv_oid = '".$orderId."';
+            var adv_cst = '".$customerId."';
             ";
 
         return $jsoutput;

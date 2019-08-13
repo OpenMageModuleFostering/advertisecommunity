@@ -67,8 +67,18 @@ class Advertise_Dataexport_Block_Adminhtml_Dataexportbackend extends Mage_Adminh
      * 
      * @return  string
      */
-    protected function _getFormAction()
+    protected function _getDataExportFormAction()
     {
         return Mage::getUrl('*/*/export');
+    }
+    
+    /**
+     * Get the product & image submission action 
+     * 
+     * @return  string
+     */
+    protected function _getProductSubmitFormAction()
+    {
+        return Mage::getUrl('*/*/exportproducts');
     }
 }

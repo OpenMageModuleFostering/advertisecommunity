@@ -26,7 +26,7 @@ class Advertise_Dataexport_Model_Exporter extends Varien_Object
     /**
      * @var string
      */
-    protected $_filname;
+    protected $_filename;
     /**
      * Remove temp data files after import?
      * 
@@ -44,8 +44,8 @@ class Advertise_Dataexport_Model_Exporter extends Varien_Object
         /**
          * @todo change this!!
          */
-        $this->_filename = Mage::getModel('dataexport/config')->getTempFolder() . DS . 'generate_' . time() . '.xml';
-        
+        // Set a basic filename just in case...
+        $this->_filename = Mage::getModel('dataexport/config')->getTempFolder() . DS . 'generate_' . $_SERVER['HTTP_HOST'] . '_' . date('Y-m-d_His') . '.xml';
         $this->_writer = new Advertise_Dataexport_Model_Xmlwriter($this->_filename);
         $this->_config = Mage::getModel('dataexport/config');
     }
@@ -57,6 +57,7 @@ class Advertise_Dataexport_Model_Exporter extends Varien_Object
      */
     public function export()
     {
+        Mage::log("export()ing file: ".$this->_filename);
         $totalItems = 0;
         /**
          * 1) Generate the XML feed as a file
@@ -86,26 +87,59 @@ class Advertise_Dataexport_Model_Exporter extends Varien_Object
             Mage::throwException($this->__('Feed Not Found! ' . $filename));    
         }
         
-        $target = $this->_getConfig()->getExportUrl();    
-        //$filename = $this->_getConfig()->getTempFolder() . DS . 'test.xml';
+        try {
+            // Zip file before transfer
+            $zip = new ZipArchive(); // Load zip library
+            $zip_name = $filename.".zip"; // Zip name
+            if($zip->open($zip_name, ZIPARCHIVE::CREATE)!==TRUE)
+            {
+                // Failed to open zip file to load
+                Mage::log("Could not create zip file of Adverti.se feed export.");
+            } else {
+                $filenamenopath = basename($filename);
+                $zip->addFile($filename, $filenamenopath); // Adding file into zip
+                $zip->close();
+                if(file_exists($zip_name))
+                {
+                    $filename = $zip_name;
+                }
+            }
+        } catch (Exception $ex) {
+            Mage::log("Error creating zip file: ".$ex);
+        }
+        
+        
+        $urlSuffix = '?filename='.substr($filename, strrpos($filename, DS) + 1);
+        $target = $this->_getConfig()->getExportUrl() . $urlSuffix;    
         $putFileSize   = filesize($filename);
-        $putFileHandle = fopen($filename, "r");
+        $putFileHandle = fopen($filename, 'rb');
 
-        $adapter = new Zend_Http_Client_Adapter_Curl();
-        $client = new Zend_Http_Client($target);
-        $client->setAdapter($adapter);
-        //$client->setHeaders('Content-Type','text/xml');
+        fseek($putFileHandle, 0); // Unnecessary???
+        $referrer = Mage::getBaseUrl();
+        //Connecting to website.
+        $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $target);
+            curl_setopt($ch, CURLOPT_PUT, true);
+            curl_setopt($ch, CURLOPT_REFERER, $referrer);
+            curl_setopt($ch, CURLOPT_UPLOAD, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 86400); // 1 Day Timeout
+            curl_setopt($ch, CURLOPT_INFILE, $putFileHandle);
+            curl_setopt($ch, CURLOPT_INFILESIZE, $putFileSize);
+            curl_setopt($ch, CURLOPT_NOPROGRESS, false);
+            curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_BUFFERSIZE, 128);
+         
+        $response = curl_exec ($ch);
+        if (curl_errno($ch))
+            $msg = curl_error($ch);
+        else
+            $msg = 'File uploaded successfully.';
+        $info = curl_getinfo($ch);
+        fclose($putFileHandle);
+        curl_close ($ch);
         
-        $adapter->setConfig(array(
-            'curloptions' => array(
-                CURLOPT_INFILE          => $putFileHandle,
-                CURLOPT_INFILESIZE      => (string) $putFileSize,
-                //CURLOPT_SSL_VERIFYHOST  => 0,
-                //CURLOPT_SSL_VERIFYPEER  => 0,
-            )
-        ));
-        
-        $response = $client->request(Zend_Http_Client::PUT);
+        // TODO: Add error handling here, check response, etc.
     }
     
     /**
@@ -117,6 +151,18 @@ class Advertise_Dataexport_Model_Exporter extends Varien_Object
     {
         $this->_exporters[] = $exporter;
         
+        return $this;
+    }
+    
+    /**
+     * Set export type; used for filename prefix
+     * 
+     * @param String
+     */
+    public function setExportType($exporttype)
+    {
+        $this->_filename = Mage::getModel('dataexport/config')->getTempFolder() . DS . $exporttype . '_' . $_SERVER['HTTP_HOST'] . '_' . date('Y-m-d_His') . '.xml';
+        $this->_writer->setFilename($this->_filename);
         return $this;
     }
     

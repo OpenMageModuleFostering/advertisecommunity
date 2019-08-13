@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 <config>
-<!-- This Adverti.se tab is used by all Adverti.se extensions for config menu!
-         So if you change it then need to change in ALL extensions! -->
 
-<!-- Top Level Tab -->
-    <tabs>
-        <Advertise translate="label">
-            <label>Advertise</label>
-            <sort_order>405</sort_order>
-        </Advertise>
-    </tabs>
+<!-- 
+   The top-level "Adverti.se" tab is defined in our Advertise_Account module, 
+   a pre-requisite for all other Adverti.se modules                           
+ -->
 
 <!-- Sections under Adverti.se tab -->
 	<sections>

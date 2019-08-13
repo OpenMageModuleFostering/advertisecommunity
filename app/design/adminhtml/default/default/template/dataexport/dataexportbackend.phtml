@@ -9,6 +9,36 @@
         <tbody>
             <tr>
                 <td style="width:50%;">
+                    <h3 class="icon-head head-cms-page">Export Product Data to Adverti.se</h3>
+                </td>
+                <td class="form-buttons">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>Use this button to re-send product data to Adverti.se whenever your product range has changed:</p>
+<br />
+
+<form id="productexportForm" action="<?php echo $this->_getProductSubmitFormAction() ?>" method="post">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    <table class="form-list">
+        <tr>
+            <td colspan="2">
+                <button class="scalable save" onclick="" type="submit" title="Export Product Data" id="productexportBtn">
+                    <span>Export Product Data</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+<br /><br />
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
                     <h3 class="icon-head head-cms-page">Adverti.se Retail Intelligence</h3>
                 </td>
                 <td class="form-buttons">
@@ -65,10 +95,10 @@
 </table>
 
 <div class="content-header">
-    <h3>Export Options</h3>
+    <h3>Retail Intelligence Export Options</h3>
 </div>
 
-<form id="dataexportForm" action="<?php echo $this->_getFormAction() ?>" method="post">
+<form id="dataexportForm" action="<?php echo $this->_getDataExportFormAction() ?>" method="post">
     <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
     <table class="form-list">
         <tr>
@@ -99,8 +129,8 @@
             <td colspan="2">
                 <?php $disabled = $this->_getConfig()->getIsEnabled() ? '' : ' disabled="disabled"' ?>
                 <?php $classDisabled = $this->_getConfig()->getIsEnabled() ? '' : ' disabled' ?>
-                <button<?php echo $disabled ?> onclick="" class="scalable<?php echo $classDisabled ?>" type="submit" title="Run Export" id="exportBtn">
-                    <span><span><span>Run Export</span></span></span>
+                <button<?php echo $disabled ?> onclick="" class="scalable save<?php echo $classDisabled ?>" type="submit" title="Run Retail Intelligence Export" id="exportBtn">
+                    <span><span><span>Run Retail Intelligence Export</span></span></span>
                 </button>
             </td>
         </tr>
