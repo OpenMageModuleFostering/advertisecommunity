@@ -26,8 +26,8 @@ class Advertise_Account_Model_Config extends Mage_Core_Model_Config_Data
 		$id_path = 'advertise_settings/settings/id';
 
 		$store_value = (!empty($this->_data['store_code'])) ? Mage::app()->getStore($this->_data['store_code'])->getConfig($id_path) : false;
-    $website_value = (!empty($this->_data['website_code'])) ? Mage::app()->getWebsite($this->_data['website_code'])->getConfig($id_path) : false;
-    $default_value = (string) Mage::getConfig()->getNode('default/' . $id_path);
+                $website_value = (!empty($this->_data['website_code'])) ? Mage::app()->getWebsite($this->_data['website_code'])->getConfig($id_path) : false;
+                $default_value = (string) Mage::getConfig()->getNode('default/' . $id_path);
 
 		if ($store_value && $scope === 'stores' && $store_value !== $website_value && $store_value !== $default_value) {
 			$form_values['id'] = $store_value;
