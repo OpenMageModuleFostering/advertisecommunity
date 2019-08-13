@@ -20,9 +20,15 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             $basket = '';
         }
-
-        $referrerId = $this->getReferrerPageProductID();
-
+        $orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+        if($orderId) {
+            //Mage::log("Got order ID: ".$orderId);
+        }
+        else {
+            //Mage::log("No order ID.");
+            $orderId = '';
+        }
+        
         $jsoutput = "
             var adv_store_base_url = '".Mage::getBaseUrl()."';
             var adv_reload = true;
@@ -30,9 +36,8 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
             adv_crosssell_reload = true;
             var adv_productid = '".$prodid."';
             var adv_bsk = '".$basket."';
-            var adv_refid = '".$referrerId."';
+            var adv_oid = '".$orderId."';
             ";
-            // var cartcount = '".Mage::helper('checkout/cart')->getCart()->getItemsCount()."';
 
         return $jsoutput;
     }
@@ -73,7 +78,11 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
 
         // getAllItems OR getAllVisibleItems()
         foreach ($session->getQuote()->getAllVisibleItems() as $item) {
-            $products[] = $item->getProductId();
+            // Add multiple copies of same ID if quantity > 1
+            $qty = $item->getQty();
+            for ($i = 0; $i < $qty; $i++) {
+                $products[] = $item->getProductId();
+            }
         }
 
         if( ! empty($products)) {
@@ -125,6 +134,7 @@ class Advertise_Dataexport_Helper_Data extends Mage_Core_Helper_Abstract
         );
     }
 
+    // Not currently used
     function getReferrerPageProductID() {
         $referrerPath = $_SERVER ['HTTP_REFERER'];
         if (!strncmp($referrerPath, Mage::getBaseUrl(), strlen(Mage::getBaseUrl()))) {
