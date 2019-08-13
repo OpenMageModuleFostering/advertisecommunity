@@ -1,0 +1,142 @@
+<?php
+/**
+ * @package dataexport
+ * 
+ */
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-cms-page">Adverti.se Retail Intelligence</h3>
+                </td>
+                <td class="form-buttons">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<table class="form-list">
+    <tr>
+        <td class="label">
+            Retail Intelligence Module
+        </td>
+        <td class="value">
+            <strong><?php echo $this->_isEnabled() ?></strong>
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            Order Export
+        </td>
+        <td class="value">
+            <strong><?php echo $this->_isOrdersEnabledText() ?></strong>
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            Customer Export
+        </td>
+        <td class="value">
+            <strong><?php echo $this->_isCustomersEnabledText() ?></strong>
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            Abandoned Carts Export
+        </td>
+        <td class="value">
+            <strong><?php echo $this->_isCartsEnabledText() ?></strong>
+        </td>
+    </tr>
+    <!-- Placeholder for when gzip is implemented
+    <tr>
+        <td class="label">
+            Gzip Compression
+        </td>
+        <td class="value">
+            <strong>Disabled</strong>
+        </td>
+    </tr>
+    -->
+</table>
+
+<div class="content-header">
+    <h3>Export Options</h3>
+</div>
+
+<form id="dataexportForm" action="<?php echo $this->_getFormAction() ?>" method="post">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    <table class="form-list">
+        <tr>
+            <td class="label">
+                <label for="date_from">Date from</label>
+            </td>
+            <td class="value">
+                <input id="date_from" name="date_from" type="text" class="text-input" value="" />
+                <img title="Select date" id="fromTrigger" 
+                     src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif' ?>" 
+                     class="v-middle"
+                />
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                <label for="date_to">Date To</label>
+            </td>
+            <td class="value">
+                <input id="date_to" name="date_to" type="text" class="text-input" value="" />
+                <img title="Select date" id="toTrigger" 
+                     src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif' ?>" 
+                     class="v-middle"
+                />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php $disabled = $this->_getConfig()->getIsEnabled() ? '' : ' disabled="disabled"' ?>
+                <?php $classDisabled = $this->_getConfig()->getIsEnabled() ? '' : ' disabled' ?>
+                <button<?php echo $disabled ?> onclick="" class="scalable<?php echo $classDisabled ?>" type="submit" title="Run Export" id="exportBtn">
+                    <span><span><span>Run Export</span></span></span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+    //var editForm = new varienForm('dataexportForm');
+    Calendar.setup({
+        inputField : 'date_from',
+        ifFormat : '%m/%e/%y',
+        button : 'fromTrigger',
+        align : 'Bl',
+        singleClick : true
+    });
+    
+    Calendar.setup({
+        inputField : 'date_to',
+        ifFormat : '%m/%e/%y',
+        button : 'toTrigger',
+        align : 'Bl',
+        singleClick : true
+    });
+//]]>
+    
+    /*var reloadurl = '<?php echo $this->getUrl('router/controller/action') ?>';
+    Element.show('loadingmask');
+    new Ajax.Request(reloadurl, {
+        method: 'post',
+        parameters: "Params_Here",
+        onComplete: function(transport) {
+            Element.hide('loadingmask');
+            $('output-div').innerHTML = "";
+            $('output-div').innerHTML = transport.responseText;
+
+        }
+    });*/
+</script>

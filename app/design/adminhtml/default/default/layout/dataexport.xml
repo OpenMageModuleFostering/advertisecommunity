@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <dataexport_adminhtml_dataexportbackend_index>
+	<reference name="content">
+	  <block type="dataexport/adminhtml_dataexportbackend" name="dataexportbackend" template="dataexport/dataexportbackend.phtml"/>
+	</reference>
+  </dataexport_adminhtml_dataexportbackend_index>
+  
+  <dataexport_adminhtml_dataexportbackend_export>
+	<reference name="content">
+	  <block type="dataexport/adminhtml_dataexportbackend" name="dataexportbackend" template="dataexport/dataexportbackend.phtml"/>
+	</reference>
+  </dataexport_adminhtml_dataexportbackend_export>
+</layout>

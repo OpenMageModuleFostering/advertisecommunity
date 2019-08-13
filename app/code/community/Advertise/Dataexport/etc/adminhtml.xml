@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <!-- Add Adverti.se to 'Catalog' top menu -->
+                <advertise_menu translate="title">
+                    <title>Adverti.se</title>
+                    <sort_order>199</sort_order>
+                    <!-- Add Retail Intelligence to Adverti.se sub-menu -->
+                    <children>
+                        <advertise_retailintelligence translate="title" module="dataexport">
+                            <title>Retail Intelligence</title>
+                            <sort_order>2</sort_order>
+                            <action>dataexport/adminhtml_dataexportbackend</action>
+                        </advertise_retailintelligence>
+                    </children>
+                </advertise_menu>
+            </children>
+         </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <advertise_menu translate="title">
+                                <title>Adverti.se</title>
+                                <children>
+                                    <advertise_retailintelligence translate="title" module="dataexport">
+                                        <title>Retail Intelligence</title>
+                                    </advertise_retailintelligence>
+                                 </children>
+                            </advertise_menu>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

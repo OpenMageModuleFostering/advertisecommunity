@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Advertise_Dataexport>
+            <version>0.1.0</version>
+        </Advertise_Dataexport>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <dataexport>
+                <use>standard</use>
+                <args>
+                    <module>Advertise_Dataexport</module>
+                    <frontName>dataexport</frontName>
+                </args>
+            </dataexport>
+        </routers>
+        <layout>
+            <updates>
+                <dataexport>
+                    <file>dataexport.xml</file>
+                </dataexport>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <helpers>
+            <dataexport>
+                <class>Advertise_Dataexport_Helper</class>
+            </dataexport>
+            <advertise_retailintelligence>
+                <class>Advertise_Dataexport_Helper</class>
+            </advertise_retailintelligence>
+        </helpers>
+        <blocks>
+            <dataexport>
+                <class>Advertise_Dataexport_Block</class>
+            </dataexport>
+        </blocks>
+        <models>
+            <dataexport>
+                <class>Advertise_Dataexport_Model</class>
+                <resourceModel>dataexport_mysql4</resourceModel>
+            </dataexport>
+            <dataexport_mysql4>
+                <class>Advertise_Dataexport_Model_Mysql4</class>
+                <entities>
+                    <modelname>
+                        <table>tablename</table>
+                    </modelname>
+                </entities>
+            </dataexport_mysql4>
+        </models>
+        <resources>
+            <dataexport_setup>
+                <setup>
+                    <module>Advertise_Dataexport</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dataexport_setup>
+            <dataexport_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dataexport_write>
+            <dataexport_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dataexport_read>
+        </resources>
+<!-- events -->
+<!--        <events>
+            <advertise_export_event>
+                <observers>
+                    <advertise_export_observer>
+                        <type>singleton</type>
+                        <class>dataexport/observer</class>
+                        <method>something</method>
+                    </advertise_export_observer>
+                </observers>
+            </advertise_export_event>
+        </events> 
+-->
+    </global>
+    <admin>
+        <routers>
+            <dataexport>
+                <use>admin</use>
+                <args>
+                    <module>Advertise_Dataexport</module>
+                    <frontName>dataexport</frontName>
+                </args>
+            </dataexport>
+        </routers>
+    </admin>
+    <adminhtml>
+        <!-- REMOVE EXTRA MENU ITEM
+        <menu>
+            <dataexport module="dataexport">
+                <title>Advertise Data Export</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <dataexportbackend module="dataexport">
+                        <title>Export Data</title>
+                        <sort_order>0</sort_order>
+                        <action>dataexport/adminhtml_dataexportbackend</action>
+                    </dataexportbackend>
+                </children>
+            </dataexport>
+        </menu>
+        -->
+
+<!-- acl -->
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <!--
+                        <dataexport translate="title" module="dataexport">
+                            <title>Dataexport</title>
+                            <sort_order>1000</sort_order>
+                            <children>
+                                <dataexportbackend translate="title">
+                                    <title>Data Export</title>
+                                </dataexportbackend>
+                            </children>
+                        </dataexport>
+                        -->
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <dataexport>
+                                            <title>Data Export Module</title>
+                                        </dataexport>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <layout>
+            <updates>
+                <dataexport>
+                    <file>dataexport.xml</file>
+                </dataexport>
+            </updates>
+        </layout>
+    </adminhtml>
+<!-- cron jobs -->
+    <crontab>
+        <jobs>
+        <advertise_dataexport>
+                <schedule>
+                    <!--<cron_expr>0,15,30,45 * * * *</cron_expr>-->
+                    <cron_expr>0 0 * * *</cron_expr><!-- each day at midnight! -->
+                </schedule>
+                <run>
+                    <model>dataexport/Scheduler::export</model>
+                </run>
+            </advertise_dataexport>
+        </jobs>
+    </crontab>
+<!--  defaults -->
+    <default>
+        <dataexport><!-- section -->
+            <dataexport_group><!-- group -->
+                <enabled>1</enabled>
+                <enabled_cron>0</enabled_cron>
+                <enable_gzip>0</enable_gzip>
+                <export_carts>1</export_carts>
+                <export_orders>1</export_orders>
+                <order_status>complete</order_status>
+                <export_customers>1</export_customers>
+                <export_url></export_url>
+             </dataexport_group>
+        </dataexport>
+    </default>
+</config> 

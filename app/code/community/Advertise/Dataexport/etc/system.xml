@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<config>
+<!-- This Adverti.se tab is used by all Adverti.se extensions for config menu!
+         So if you change it then need to change in ALL extensions! -->
+
+<!-- Top Level Tab -->
+    <tabs>
+        <Advertise translate="label">
+            <label>Advertise</label>
+            <sort_order>405</sort_order>
+        </Advertise>
+    </tabs>
+
+<!-- Sections under Adverti.se tab -->
+	<sections>
+            <dataexport translate="label" module="dataexport">
+                <tab>Advertise</tab>
+                <label>Retail Intelligence</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>500</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <groups>
+                    <dataexport_group translate="label">
+                        <label>Retail Intelligence Options</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <enabled translate="label">
+                                <label>Enable Retail Intelligence</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>1</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Retail Intelligence needs to be enabled for Adverti.se Related, Upsell and Cross-Sell Product modules.</comment>
+                            </enabled>
+                            <enabled_cron translate="label">
+                                <label>Enable Scheduled Exports</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Scheduled exports help us to keep your Related, Upsell and Cross-Sell products fresh.</comment>
+                            </enabled_cron>
+                            <!--
+                            <enable_gzip translate="label">
+                                <label>Enable GZip Compression</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Exported data can be compressed before being sent</comment>
+                            </enable_gzip>
+                            -->
+                            <!--
+                            <export_url>
+                                <label>Data Export Endpoint URL</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>3</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <comment>location the data will be exported to **to be removed**</comment>
+                            </export_url>
+                            -->
+                            <export_orders translate="label">
+                                <label>Export Orders?</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Sending us your order information will allow us to suggest "Customers who bought this also bought..." products.</comment>
+                            </export_orders>
+                            
+                            <order_status translate="label">
+                                <label>Order Export Status</label>
+                                <comment>Only orders with this status will be exported.</comment>
+                                <frontend_type>multiselect</frontend_type>
+                                <sort_order>11</sort_order>
+                                <!-- for multiselects! -->
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>dataexport/orderstatus</source_model>
+                            </order_status>
+                            
+                            <export_customers translate="label">
+                                <label>Export Customers?</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Exporting your customers enables us to do social targeting.</comment>
+                            </export_customers>
+                            <export_carts translate="label">
+                                <label>Export Abandoned Carts?</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>30</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Exporting your abandoned carts gives us additional data on which products are chosen together.</comment>
+                            </export_carts>
+
+                            <!-- This is covered by "Export Orders" - no need for extra field.
+                            <export_productids translate="label">
+                                <label>Export Product IDs to Header?</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <comment>Product ID hash will be added to the head of the document.</comment>
+                            </export_productids>
+                            -->
+
+                        </fields>
+                    </dataexport_group>
+                </groups>
+            </dataexport>
+	</sections>
+</config>
