@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adverti.se Upsell Products</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="./resources/install.css" media="all" />
+    </head>
+    <body>
+<div id="content">
+    <img class="adv_logo" src="./resources/backend-advertise-logo.png" alt="Adverti.se" height="45" width="220" />
+    <h1>Activating Adverti.se Upsell Products</h1>
+    <p>Thank you for installing our Upsell Products module. <br /><br />
+    Before upsell products will appear in the front end of your site you 
+    need to complete the following simple modifications to your current theme's 
+    template files. Once you have completed the steps below you will see our 
+    upsell product suggestions appear on your product pages:</p>
+    <h2>Step 1</h2>
+    <p>Find the template file <span class="filename">upsell.phtml</span>
+        used by your theme. You should find it here:<br />
+        <br />
+        <span class="filepath">&lt;Magento-root-folder&gt;/app/design/frontend/&lt;theme-package&gt;/&lt;theme-name&gt;/template/catalog/product/list/upsell.phtml</span><br />
+        <br />
+        Copy and paste these lines at the top of the file:
+    </p>
+<pre>
+  <code>
+  &lt;div id=&quot;advupsell&quot;&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    if(adv_upsell_reload){
+      loadAdvertiseUpsellProducts();
+      adv_upsell_reload=false;
+    }
+  &lt;/script&gt;
+  </code>
+</pre>
+            <p>And add this line at the end of the file:</p>
+<pre>
+  <code>
+  &lt;/div&gt;
+  </code>
+</pre>
+
+<h2>Step 2</h2>
+<p>Find the template file <span class="filename">head.phtml</span> used by your theme. You should find it here:<br />
+    <br />
+    <span class="filepath">&lt;Magento-root-folder&gt;/app/design/frontend/&lt;theme-package&gt;/&lt;theme-name&gt;/template/page/html/head.phtml</span><br />
+    <br />
+    Copy and paste this script tag somewhere within the &lt;head&gt; element in that file:
+</p>
+<pre>
+  <code>
+    &lt;script type="text/javascript"&gt;
+      &lt;?php 
+        echo Mage::helper('advertise_retailintelligence')-&gt;getAdvertiseHeaderScript();
+      ?&gt;
+    &lt;/script&gt;
+  </code>
+</pre>
+
+<h2>Step 3</h2>
+<p>If you have not done so already, register your Adverti.se account by saving your details in the Magento Admin panel at:<br />
+    <br />
+    <span class="filepath">System &rarr; Configuration &rarr; Adverti.se &rarr; Account Settings</span><br />
+    <br />
+    At the same time your product data will be sent to us for processing, to enable us to suggest relevant products from your store.
+</p>
+<hr />
+<p class="footer">&copy; Adverti.se 2013</p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+/* 
+    Document   : install.css
+    Package    : Advertise_Community
+    Stylesheet for Adverti.se Installation Instruction pages
+*/
+
+root { 
+    display: block;
+}
+
+body {
+    background-color: #FAFAD2;
+    color: #000000;
+    font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+}
+#content {
+    width:80%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+p {
+    clear: left;
+    margin-bottom: 1em;
+}
+
+code, .filename, .filepath, .code {
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+}
+.code {
+    background-color: #DDDDDD;
+}
+pre {
+    width: 80%;
+    clear:left;
+    margin-left: 20px;
+    margin-right: auto;
+    background-color: #DDDDDD;
+    font-size: 100%;
+    overflow:auto;
+}
+.filepath, .filename {
+    color: #800000;
+}
+
+.align-right { 
+    float:right; margin: 0 0 15px 15px; padding-left: 50px;
+}
+
+hr {
+  border: 0;
+  width: 90%;
+  color: #800000;
+  background-color: #800000;
+  height: 3px;
+}
+
+td.borderon {
+    border:2px solid black;
+}
+td.righttext {
+    text-align: right;
+}
+table.swatch {
+    
+    margin-left: 40px;
+    margin-right: auto;
+}
+
+p.footer {
+    text-align: center;
+    font-size: 75%;
+    color: #800000;
+}
