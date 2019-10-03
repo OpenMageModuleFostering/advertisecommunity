@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/AdvertiseCommunity",
+    "name": "openmage-module-fostering\/advertisecommunity",
     "type": "magento-module",
-    "license": "OSL",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Provides common functionality required by Advertise Suggested Products, Advertise Colors, & Advertise Ads",
     "authors": [
